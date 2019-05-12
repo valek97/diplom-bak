@@ -17,6 +17,8 @@ namespace Bot_Vk_2
             InitializeComponent();
         }
 
+        public string Code { get { return textBox1.Text; } }
+
         private void button2_Click(object sender, EventArgs e)
         {
             
@@ -26,6 +28,11 @@ namespace Bot_Vk_2
         {
             DataBank.Text = textBox1.Text;
             
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
