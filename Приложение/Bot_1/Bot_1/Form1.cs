@@ -49,7 +49,12 @@ namespace Bot_1
                 else
                     Send("Авторизация не удалась, проверьте данные");
             }
-            else if (radioButton2.Checked == true) { }
+            else if (radioButton2.Checked == true) {
+
+                
+                
+
+            }
             else if(radioButton3.Checked == true) { }
             else if(radioButton4.Checked == true) { }
         }
