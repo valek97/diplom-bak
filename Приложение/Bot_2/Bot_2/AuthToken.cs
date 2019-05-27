@@ -25,7 +25,7 @@ namespace Bot_2.work
             /// <summary>
             /// токен
             /// </summary>
-            public string access_token { get; set; }
+            public static string access_token { get; set; }
             /// <summary>
             /// время жизни токена
             /// </summary>

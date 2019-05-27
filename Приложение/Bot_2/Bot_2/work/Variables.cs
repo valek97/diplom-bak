@@ -9,5 +9,6 @@ namespace Bot_2
     class Variables
     {
         public static string V = "5.87";
+        
     }
 }
