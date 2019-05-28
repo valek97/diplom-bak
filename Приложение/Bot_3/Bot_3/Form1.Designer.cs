@@ -292,7 +292,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(140, 20);
             this.textBox4.TabIndex = 1;
-            this.textBox4.Text = "157199051";
+            this.textBox4.Text = "182736269";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
@@ -339,6 +339,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(140, 20);
             this.textBox3.TabIndex = 0;
+            this.textBox3.Text = "30527644";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button6

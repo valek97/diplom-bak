@@ -9,5 +9,10 @@ namespace Bot_3
     class Variable
     {
         public static string V = "5.87";
+        /// <summary>
+        /// token
+        /// </summary>
+        public static string token { get; set; }
+        
     }
 }

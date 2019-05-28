@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Bot_3
 {
     public partial class Form1 : Form
     {
-        public string token;
+
         public int user_id;
 
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -25,19 +26,20 @@ namespace Bot_3
 
         private void Send(string Text)
         {
-            richTextBox1.AppendText(Text + "\n");
-           // richTextBox1.AppendText(AuthToken.Result.access_token);
+           // richTextBox1.AppendText(Text + "\n");
+            richTextBox1.AppendText($"{Text}" + "\n");
+            // richTextBox1.AppendText(AuthToken.Result.access_token);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-                var auth = new AuthToken(textBox1.Text, textBox2.Text);
-                if (auth.Auth() == true)
-                    Send("Авторизация удалась:" + AuthToken.Result.user_id);
-                else
-                    Send("Авторизация не удалась, проверьте данные");
-            
+
+            var auth = new AuthToken(textBox1.Text, textBox2.Text);
+            if (auth.Auth() == true)
+                Send("Авторизация удалась:" + AuthToken.Result.user_id);
+            else
+                Send("Авторизация не удалась, проверьте данные");
+
             // string[] Data = File.ReadAllLines("login.txt");
             //Authoreg();
 
@@ -51,10 +53,10 @@ namespace Bot_3
                 label3.Text = "проверьте данные";
             else
             {
-                token = Json["access_token"].ToString();
+                Variable.token = Json["access_token"].ToString();
                 user_id = (int)Json["user_id"];
                 label3.Text = "Авторизация удалась";
-                
+
             }
 
 
@@ -83,7 +85,10 @@ namespace Bot_3
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
+            string response = vk.groupeGetById(Convert.ToInt32(textBox3.Text));
 
+            Parse.GetById GroupeInfo = JsonConvert.DeserializeObject < Parse.GetById >(response);
+            Send($"Группа откуда  будем загружать посты. Название группы:{GroupeInfo.response[0].name}, id {GroupeInfo.response[0].id}");
         }
         /// <summary>
         /// куда
@@ -92,7 +97,37 @@ namespace Bot_3
         /// <param name="e"></param>
         private void button7_Click(object sender, EventArgs e)
         {
+            string response = vk.groupeGetById(Convert.ToInt32(textBox4.Text));
 
+            Parse.GetById GroupeInfo = JsonConvert.DeserializeObject<Parse.GetById>(response);
+            Send($"Группа куда будем загружать посты. Название группы:{GroupeInfo.response[0].name} id {GroupeInfo.response[0].id}");
         }
+    }
+
+    class Parse
+    {
+
+        public class GetById
+        {
+            public Response[] response { get; set; }
+
+            public class Response
+            {
+                public int id { get; set; }
+                public string name { get; set; }
+                public string screen_name { get; set; }
+                public int is_closed { get; set; }
+                public string type { get; set; }
+                public int is_admin { get; set; }
+                public int is_member { get; set; }
+                public int is_advertiser { get; set; }
+                public string photo_50 { get; set; }
+                public string photo_100 { get; set; }
+                public string photo_200 { get; set; }
+            }
+        }
+
+        
+
     }
 }
