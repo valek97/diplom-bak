@@ -14,7 +14,9 @@ namespace Bot_2
 {
     public partial class Form1 : Form
     {
-
+        public string token;
+        public int user_id;
+        int groupe = -157199051;
        
         public Form1()
         {
@@ -42,12 +44,13 @@ namespace Bot_2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var auth = new work.AuthToken(Login.Text, Pass.Text);
+            /*var auth = new work.AuthToken(Login.Text, Pass.Text);
             if (auth.Auth() == true)
                 Send("Авторизация удалась:" + auth.Result.user_id);
             else
                 Send("Авторизация не удалась, проверьте данные");
-            // Authoreg();
+                */
+             Authoreg();
 
         }
         void Authoreg()
@@ -57,7 +60,11 @@ namespace Bot_2
             if (response.Contains("error") || Login.Text.Length < 5 || Pass.Text.Length < 5)
                 label3.Text = "Проверьте данные";
             else;
-                  label3.Text = "Авторизация не удалась";
+            {
+                token = json["access_token"].ToString();
+                user_id = (int)json ["user_id"];
+                label3.Text = "Авторизация не удалась";
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -68,6 +75,12 @@ namespace Bot_2
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string response = work.vk.groupeGetById(Convert.ToInt32( textBox3.Text));
+            richTextBox1.Text = response;
         }
     }
 }

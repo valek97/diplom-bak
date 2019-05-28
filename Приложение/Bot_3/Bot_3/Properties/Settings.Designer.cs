@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bot_2.Properties
+namespace Bot_3.Properties
 {
 
 

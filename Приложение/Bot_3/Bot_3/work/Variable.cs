@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot_2
+namespace Bot_3
 {
-    class Variables
+    class Variable
     {
         public static string V = "5.87";
-        
     }
 }
