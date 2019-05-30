@@ -21,8 +21,8 @@ namespace Bot_3
             Params["client_id"] = 6769897;
             Params["client_secret"] = "kVBeEoVu11o8zh8FgO41";
             Params["v"] = Variable.V;
-            string response = request.Get("https://oauth.vk.com/token", Params).ToString();
-
+            
+            string response = AuthToken.Result.access_token;
             return response;
 
 
@@ -40,19 +40,19 @@ namespace Bot_3
         /// <param name="offset">Смещение</param>
         /// <param name="count">Получить нужное кол-во</param>
         /// <returns></returns>
-        public static string wallGet(int owner_id, bool extended = true, int offset = 0, int count = 100)
+        public static string wallGet(int owner_id, bool extended = false, int offset = 0, int count = 100)
         {
             HttpRequest request = new HttpRequest();
             RequestParams Params = new RequestParams();
 
-            Params["owner_id"] = owner_id;
+            Params["owner_id"] = "-" + owner_id;
             Params["extended"] = extended.GetHashCode();
 
             Params["offset"] = offset;
             Params["count"] = count;
             Params["access_token"] = AuthToken.Result.access_token;
             Params["v"] = Variable.V;
-            string response = request.Get("https://api.vk.com/nethod/" + "wall.get", Params).ToString();
+            string response = request.Get("https://api.vk.com/method/" + "wall.get", Params).ToString();
             return response;
 
 
@@ -77,7 +77,7 @@ namespace Bot_3
             Params["close_comments"] = close_comments.GetHashCode();
             Params["access_token"] = AuthToken.Result.access_token;
             Params["v"] = Variable.V;
-            string response = request.Get("https://api.vk.com/nethod/" + "wall.post", Params).ToString();
+            string response = request.Get("https://api.vk.com/method/" + "wall.post", Params).ToString();
             return response;
 
 
@@ -105,7 +105,7 @@ namespace Bot_3
             Params["count"] = count;
             Params["access_token"] = AuthToken.Result.access_token;
             Params["v"] = Variable.V;
-            string response = request.Get("https://api.vk.com/nethod/" + "groupe.post", Params).ToString();
+            string response = request.Get("https://api.vk.com/method/" + "groupe.post", Params).ToString();
             return response;
 
 
@@ -192,7 +192,7 @@ namespace Bot_3
             Params["latitude"] = latitude;
             Params["access_token"] = AuthToken.Result.access_token;
             Params["v"] = Variable.V;
-            string response = request.Get("https://api.vk.com/nethod/" + "photos.saveWallPhoto", Params).ToString();
+            string response = request.Get("https://api.vk.com/method/" + "photos.saveWallPhoto", Params).ToString();
             return response;
 
         }

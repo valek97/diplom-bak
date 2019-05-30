@@ -8,7 +8,7 @@ namespace Bot_3
 {
     class Variable
     {
-        public static string V = "5.87";
+        public static string V = "5.95";
         /// <summary>
         /// token
         /// </summary>

@@ -26,6 +26,7 @@ namespace Bot_3
             /// токен
             /// </summary>
             public string access_token { get; set; }
+            
             /// <summary>
             /// время жизни токена
             /// </summary>

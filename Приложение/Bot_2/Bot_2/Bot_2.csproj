@@ -50,17 +50,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="xNetStandard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xNetStandard.1.1.0\lib\netstandard2.0\xNetStandard.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthToken.cs" />
     <Compile Include="D:\diplom-bak\Приложение\Bot_2.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="D:\diplom-bak\Приложение\Bot_2.Designer.cs">
-      <DependentUpon>Bot_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +72,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="..\Bot_2.Designer" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
