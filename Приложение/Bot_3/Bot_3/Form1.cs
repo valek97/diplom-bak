@@ -112,8 +112,17 @@ namespace Bot_3
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            Varb();
             work();
+            
         }
+
+        void Varb ()
+        {
+            group_Otkuda = Convert.ToInt32(textBox3.Text);
+            group_Kuda = Convert.ToInt32(textBox4.Text);
+        }
+
 
         private void groupBox6_Enter(object sender, EventArgs e)
         {
@@ -135,7 +144,7 @@ namespace Bot_3
                     {
                    int owner_idImage = WallGet.response.items[i].attachments[0].photo.owner_id;                    //Картинка
                    int idImage = WallGet.response.items[i].attachments[0].photo.id;                                //Картинка
-                    string Image = WallGet.response.items[i].attachments[0].photo.sizes[0].url;                     //Ссылка на картинку
+                    string Image = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
 
                     WebClient wc = new WebClient();
                     Image img = new Bitmap(wc.OpenRead(Image));
@@ -149,6 +158,9 @@ namespace Bot_3
           //  richTextBox1.Text = wallGet.response.items[0].text;
             richTextBox1.Text = WallGet.response.items[0].attachments[0].photo.sizes[6].url;
         }
+
+
+
 
     }
 

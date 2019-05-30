@@ -422,6 +422,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -436,16 +438,19 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 16);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 100;
             this.dataGridView1.Size = new System.Drawing.Size(756, 438);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column1
             // 
+            this.Column1.FillWeight = 58.06787F;
             this.Column1.HeaderText = "добавить";
             this.Column1.Name = "Column1";
             // 
             // Column2
             // 
+            this.Column2.FillWeight = 53.19427F;
             this.Column2.HeaderText = "Откуда";
             this.Column2.Name = "Column2";
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -453,26 +458,33 @@
             // 
             // Column3
             // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.FillWeight = 318.9413F;
             this.Column3.HeaderText = "Картинка";
+            this.Column3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.Column3.Name = "Column3";
             // 
             // Column4
             // 
+            this.Column4.FillWeight = 65.0754F;
             this.Column4.HeaderText = "Описание";
             this.Column4.Name = "Column4";
             // 
             // Column5
             // 
+            this.Column5.FillWeight = 66.28194F;
             this.Column5.HeaderText = "Лайки";
             this.Column5.Name = "Column5";
             // 
             // Column6
             // 
+            this.Column6.FillWeight = 67.37321F;
             this.Column6.HeaderText = "Комменты";
             this.Column6.Name = "Column6";
             // 
             // Column9
             // 
+            this.Column9.FillWeight = 71.06599F;
             this.Column9.HeaderText = "Репосты";
             this.Column9.Name = "Column9";
             // 
