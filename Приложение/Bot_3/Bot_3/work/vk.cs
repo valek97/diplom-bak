@@ -40,12 +40,12 @@ namespace Bot_3
         /// <param name="offset">Смещение</param>
         /// <param name="count">Получить нужное кол-во</param>
         /// <returns></returns>
-        public static string wallGet(int owner_id, bool extended = false, int offset = 0, int count = 100)
+        public static string WallGet(int owner_id, bool extended = false, int offset = 0, int count = 100)
         {
             HttpRequest request = new HttpRequest();
             RequestParams Params = new RequestParams();
 
-            Params["owner_id"] = "-" + owner_id;
+            Params["owner_id"] =  owner_id;
             Params["extended"] = extended.GetHashCode();
 
             Params["offset"] = offset;
