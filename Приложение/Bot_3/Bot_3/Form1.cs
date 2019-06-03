@@ -140,20 +140,30 @@ namespace Bot_3
                 int Likes = WallGet.response.items[i].likes.count;      //Лайки
                 int Repost = WallGet.response.items[i].reposts.count;   //Репосты
                 int Comment = WallGet.response.items[i].comments.count; //Комментарии
+                
+
+                
+
+
               if (WallGet.response.items[0].attachments[0].type == "photo")
                     {
-                   int owner_idImage = WallGet.response.items[i].attachments[0].photo.owner_id;                    //Картинка
-                   int idImage = WallGet.response.items[i].attachments[0].photo.id;                                //Картинка
-                    string Image = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
+                    try
+                    {
+                        int owner_idImage = WallGet.response.items[i].attachments[0].photo.owner_id;                    //Картинка
+                        int idImage = WallGet.response.items[i].attachments[0].photo.id;                                //Картинка
+                        string Image = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
 
-                    WebClient wc = new WebClient();
-                    Image img = new Bitmap(wc.OpenRead(Image));
-                    dataGridView1.Rows.Add(false, -group_Otkuda, img, text, Likes, Comment, Repost, owner_idImage,idImage);
-                     }
-                    else
-                     {
-                    dataGridView1.Rows.Add(false, -group_Otkuda, "", text, Likes, Comment, Repost, "", "");
+                        WebClient wc = new WebClient();
+                        Image img = new Bitmap(wc.OpenRead(Image));
+                        dataGridView1.Rows.Add(false, -group_Otkuda, img, text, Likes, Comment, Repost, owner_idImage, idImage);
+                    }
+                    catch
+                    {
+                        
+                        dataGridView1.Rows.Add(false, -group_Otkuda, null, text, Likes, Comment, Repost, "", "");
+                    }
                 }
+                    
                  }
           //  richTextBox1.Text = wallGet.response.items[0].text;
             richTextBox1.Text = WallGet.response.items[0].attachments[0].photo.sizes[6].url;
