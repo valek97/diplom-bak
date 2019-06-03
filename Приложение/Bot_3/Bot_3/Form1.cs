@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -16,7 +16,7 @@ namespace Bot_3
 {
     public partial class Form1 : Form
     {
-
+        Thread[] Thread = new Thread[2];
         public int user_id;
         public int group_Otkuda, group_Kuda;
 
@@ -28,7 +28,14 @@ namespace Bot_3
         private void Send(string Text)
         {
             // richTextBox1.AppendText(Text + "\n");
-            richTextBox1.AppendText($"{Text}" + "\n");
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                richTextBox1.AppendText($"{Text}\n");
+                richTextBox1.ScrollToCaret();
+            });
+
+            //richTextBox1.AppendText($"{Text}" + "\n");
             // richTextBox1.AppendText(AuthToken.Result.access_token);
         }
 
@@ -113,7 +120,10 @@ namespace Bot_3
         private void button2_Click(object sender, EventArgs e)
         {
             Varb();
-            work();
+
+            Thread[0] = new Thread(delegate() { AddInTableImage(); });
+            Thread[0].Start();
+            
             
         }
 
@@ -129,7 +139,7 @@ namespace Bot_3
             
         }
 
-        void work()
+        void AddInTableImage()
         {
             
             var WallGet =  JsonConvert.DeserializeObject<Parse.wallGet>(vk.WallGet(-group_Otkuda));
@@ -140,33 +150,46 @@ namespace Bot_3
                 int Likes = WallGet.response.items[i].likes.count;      //Лайки
                 int Repost = WallGet.response.items[i].reposts.count;   //Репосты
                 int Comment = WallGet.response.items[i].comments.count; //Комментарии
-                
-
-                
 
 
-              if (WallGet.response.items[0].attachments[0].type == "photo")
+
+                string ImageTableAdd = "",  //Данные фото
+                    ImageTable= "";         //Первая картинка поста
+                for (int j = 0; j < WallGet.response.items[i].attachments.Count(); j++)
+                {
+                    if (WallGet.response.items[i].attachments[j].type == "photo")
                     {
-                    try
-                    {
-                        int owner_idImage = WallGet.response.items[i].attachments[0].photo.owner_id;                    //Картинка
-                        int idImage = WallGet.response.items[i].attachments[0].photo.id;                                //Картинка
-                        string Image = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
+                        try
+                        {
+                            int owner_idImage = WallGet.response.items[i].attachments[j].photo.owner_id;                    //id откуда берем картинку
+                            int idImage = WallGet.response.items[i].attachments[j].photo.id;                                //id картинки
+                            if (j==0)//Если равно 0, то берем главную картинку
+                                ImageTable = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
 
-                        WebClient wc = new WebClient();
-                        Image img = new Bitmap(wc.OpenRead(Image));
-                        dataGridView1.Rows.Add(false, -group_Otkuda, img, text, Likes, Comment, Repost, owner_idImage, idImage);
-                    }
-                    catch
-                    {
-                        
-                        dataGridView1.Rows.Add(false, -group_Otkuda, null, text, Likes, Comment, Repost, "", "");
-                    }
-                }
-                    
+                            ImageTableAdd = $"photo{owner_idImage}_{idImage}"+ImageTableAdd;                                //Добавление вложений в переменную
+                            WebClient wc = new WebClient();
+                            Image img = new Bitmap(wc.OpenRead(ImageTable));//Открытие картинки
+                            this.Invoke((MethodInvoker)delegate ()
+                            {
+                                dataGridView1.Rows.Add(false, -group_Otkuda, img, text, Likes, Comment, Repost, ImageTableAdd);
+                            });//Добавление в таблицу
+                            
+                        }
+                        catch
+                        {
+                            this.Invoke((MethodInvoker)delegate ()
+                            {
+                                dataGridView1.Rows.Add(false, -group_Otkuda, null, text, Likes, Comment, Repost, "", "");
+                            });
+                            
+                        }
+                    }       //Проверка вложения на фото
+                }           //Перебор вложений поста
+
+                Send($"Добавил картинку и вывел пост{i}");
                  }
           //  richTextBox1.Text = wallGet.response.items[0].text;
-            richTextBox1.Text = WallGet.response.items[0].attachments[0].photo.sizes[6].url;
+          //  richTextBox1.Text = WallGet.response.items[0].attachments[0].photo.sizes[6].url;
         }
 
 
