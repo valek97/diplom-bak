@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bot_3
 {
@@ -13,6 +14,10 @@ namespace Bot_3
         /// token
         /// </summary>
         public static string token { get; set; }
+        /// <summary>
+        /// Данные таблицы
+        /// </summary>
+        public static DataGridView dataGridView{ get; set;}
         
     }
 }

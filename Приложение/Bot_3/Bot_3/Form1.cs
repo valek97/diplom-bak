@@ -121,16 +121,19 @@ namespace Bot_3
         {
             Varb();
 
-            Thread[0] = new Thread(delegate() { AddInTableImage(); });
+            Thread[0] = new Thread(delegate() { work(); });
             Thread[0].Start();
             
             
         }
-
+        /// <summary>
+        /// Заполнить данные
+        /// </summary>
         void Varb ()
         {
             group_Otkuda = Convert.ToInt32(textBox3.Text);
             group_Kuda = Convert.ToInt32(textBox4.Text);
+            
         }
 
 
@@ -139,6 +142,91 @@ namespace Bot_3
             
         }
 
+        /// <summary>
+        /// Работа с данными
+        /// </summary>
+
+        void work()
+        {
+            AddInTableImage();
+            Send("Поток успешно остановлен, выберите посты которые будем загружать и нажмите продолжить");
+            Thread[0].Suspend();
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                Variable.dataGridView = dataGridView1;
+            });
+
+            
+            UploadImageWallPost();
+
+
+        }
+
+
+        /// <summary>
+        /// Загрузка картинки на страницу
+        /// </summary>
+        void UploadImageWallPost()
+        {
+            for (int i = 0; i < Variable.dataGridView.Rows.Count-1; i++)
+            {
+                string test = Variable.dataGridView[0, i].Value.ToString();
+               // string att = Variable.dataGridView[7, i].Value.ToString();
+                if (test == "True")
+                {
+                    vk.wallPost(-group_Kuda, Variable.dataGridView[3, i].Value.ToString(),
+
+                        Variable.dataGridView[7, i].Value.ToString());
+                }
+
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Thread[0].Resume();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Thread[0].Abort();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Thread[0].Suspend();
+        }
+        /// <summary>
+        /// Добавить дату
+        /// </summary>
+        
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DateTime Dt = new DateTime(dateTimePicker1.Value.Year,
+                                        dateTimePicker1.Value.Month,
+                                        dateTimePicker1.Value.Day,
+                                        dateTimePicker1.Value.TimeOfDay.Hours,
+                                        dateTimePicker1.Value.TimeOfDay.Minutes,
+                                        dateTimePicker1.Value.TimeOfDay.Seconds
+                                                                 );
+            var data = UnixTimeEf.UnixEncoding(Dt);
+
+            // richTextBox1.Text = UnixTimeEf.UnixEncoding(Dt).ToString();
+
+            try
+            {
+                dataGridView1[9, dataGridView1.CurrentRow.Index].Value = data.ToString();
+
+                richTextBox1.Text = dataGridView1[9, dataGridView1.CurrentRow.Index].Value.ToString();
+            }
+            catch { }
+
+        }
+
+        /// <summary>
+        /// Добавление в таблицу картинок
+        /// </summary>
         void AddInTableImage()
         {
             
