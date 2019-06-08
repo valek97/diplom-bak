@@ -17,7 +17,7 @@ namespace Bot_3
         /// <summary>
         /// Данные таблицы
         /// </summary>
-        public static DataGridView dataGridView{ get; set;}
+        public static DataGridView DataGridView{ get; set;}
         
     }
 }

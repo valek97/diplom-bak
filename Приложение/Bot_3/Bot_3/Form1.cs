@@ -154,7 +154,7 @@ namespace Bot_3
 
             this.Invoke((MethodInvoker)delegate ()
             {
-                Variable.dataGridView = dataGridView1;
+                Variable.DataGridView = dataGridView1;
             });
 
             
@@ -169,15 +169,26 @@ namespace Bot_3
         /// </summary>
         void UploadImageWallPost()
         {
-            for (int i = 0; i < Variable.dataGridView.Rows.Count-1; i++)
+            for (int i = 0; i < Variable.DataGridView.Rows.Count-1; i++)
             {
-                string test = Variable.dataGridView[0, i].Value.ToString();
-               // string att = Variable.dataGridView[7, i].Value.ToString();
+                string test = Variable.DataGridView[0, i].Value.ToString();
+                string att = Variable.DataGridView[7, i].Value.ToString();
+                string Date = "";
+                  
+                try
+                {
+                    Date = Variable.DataGridView[8, i].Value.ToString();
+                }
+                catch
+                {
+                    Date = null;
+                }
                 if (test == "True")
                 {
-                    vk.wallPost(-group_Kuda, Variable.dataGridView[3, i].Value.ToString(),
+                    vk.wallPost(-group_Kuda, Variable.DataGridView[3, i].Value.ToString(),
 
-                        Variable.dataGridView[7, i].Value.ToString());
+                        Variable.DataGridView[7, i].Value.ToString(),
+                        Date);
                 }
 
             }
@@ -216,9 +227,9 @@ namespace Bot_3
 
             try
             {
-                dataGridView1[9, dataGridView1.CurrentRow.Index].Value = data.ToString();
+                dataGridView1[8, dataGridView1.CurrentRow.Index].Value = data.ToString();
 
-                richTextBox1.Text = dataGridView1[9, dataGridView1.CurrentRow.Index].Value.ToString();
+                richTextBox1.Text = dataGridView1[8, dataGridView1.CurrentRow.Index].Value.ToString();
             }
             catch { }
 
@@ -254,7 +265,7 @@ namespace Bot_3
                             if (j==0)//Если равно 0, то берем главную картинку
                                 ImageTable = WallGet.response.items[i].attachments[0].photo.sizes[6].url;                     //Ссылка на картинку
 
-                            ImageTableAdd = $"photo{owner_idImage}_{idImage}"+ImageTableAdd;                                //Добавление вложений в переменную
+                            ImageTableAdd = $"photo-{group_Otkuda}_{idImage},"+ImageTableAdd;                                //Добавление вложений в переменную
                             WebClient wc = new WebClient();
                             Image img = new Bitmap(wc.OpenRead(ImageTable));//Открытие картинки
                             this.Invoke((MethodInvoker)delegate ()
@@ -267,7 +278,7 @@ namespace Bot_3
                         {
                             this.Invoke((MethodInvoker)delegate ()
                             {
-                                dataGridView1.Rows.Add(false, -group_Otkuda, null, text, Likes, Comment, Repost, "", "");
+                                dataGridView1.Rows.Add(false, -group_Otkuda, null, text, Likes, Comment, Repost,  "");
                             });
                             
                         }

@@ -67,13 +67,16 @@ namespace Bot_3
         /// <param name="close_comments">открыты или закрыты комментарии</param>
         /// <returns></returns>
 
-        public static string wallPost(int owner_id, string message, string attachements = null, bool close_comments = false)
+        public static string wallPost(int owner_id, string message, string attachements = null, string publish_date = null, bool close_comments = false)
         {
             HttpRequest request = new HttpRequest();
             RequestParams Params = new RequestParams();
             Params["owner_id"] = owner_id;
+           
             Params["message"] = message;
+
             Params["attachements"] = attachements;
+            Params["publish_date"] = publish_date;
             Params["close_comments"] = close_comments.GetHashCode();
             Params["access_token"] = AuthToken.Result.access_token;
             Params["v"] = Variable.V;
